@@ -1,10 +1,13 @@
 import tensorflow as tf
 
 #tf.data를 이용하여 파일에서 데이터 읽어오기
+#.skip(1) : 첫번째 줄은 제외하고(헤더)
+#.repeat() : 파일의 끝에 도달하더라도 처음부터 무한 반복
+#.batch(10) : 한 번에 10개씩 묶어서 사용
 iterator = tf.data.TextLineDataset("data-01-test-score.csv")\
-           .skip(1)\   #첫번째 줄은 제외하고(헤더)
-           .repeat()\  #파일의 끝에 도달하더라도 처음부터 무한 반복
-           .batch(10)\ #한 번에 10개씩 묶어서 사용
+           .skip(1)\
+           .repeat()\
+           .batch(10)\
            .make_initializable_iterator();
 
 #반복자가 다음 데이터를 읽어오도록 dataset 노드에 명령을 저장
